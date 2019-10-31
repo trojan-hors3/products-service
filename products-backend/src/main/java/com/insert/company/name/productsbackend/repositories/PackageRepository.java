@@ -9,7 +9,9 @@ import java.util.stream.Collectors;
 /**
  * @author Callum Cooper
  * TODO: For the purposes of this demo the repository is a
- * TODO: mutable in memory List. For a production grade system
+ * TODO: mutable in memory List. As the in memory list is
+ * TODO: mutable, side effects could be caused with concurency.
+ * TODO: For a concurrent production grade system
  * TODO: a more permanent, robust data store would need to be adopted.
  */
 public class PackageRepository {
