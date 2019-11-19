@@ -1,5 +1,6 @@
 package com.insert.company.name.productsbackend.services;
 
+import com.insert.company.name.productsbackend.clients.ProductClient;
 import com.insert.company.name.productsbackend.models.entities.Package;
 import com.insert.company.name.productsbackend.models.entities.Product;
 import com.insert.company.name.productsbackend.models.http.CreatePackageRequest;
@@ -19,7 +20,7 @@ import java.util.stream.Collectors;
 public class PackageService {
 
     @Autowired
-    private ProductService productService;
+    private ProductClient productClient;
 
     @Autowired
     private ExchangeRateService exchangeRateService;
@@ -39,7 +40,7 @@ public class PackageService {
         List<Product> products = createPackageRequest
                 .getProductIds()
                 .stream()
-                .map(productService::getProduct)
+                .map(productClient::getProduct)
                 .map(product -> applyNewPriceToProduct.apply(product, baseCountry, currency))
                 .collect(Collectors.toList());
 

@@ -1,6 +1,7 @@
 package com.insert.company.name.productsbackend.models.http;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.insert.company.name.productsbackend.models.entities.Package;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -9,7 +10,7 @@ import lombok.Getter;
  */
 @AllArgsConstructor
 @Getter
-public class CreatePackageResponse<T> {
+public class CreatePackageResponse {
 
     @JsonProperty
     int statusCode;
@@ -18,5 +19,5 @@ public class CreatePackageResponse<T> {
     String description;
 
     @JsonProperty
-    T obj;
+    Package createdPackage;
 }

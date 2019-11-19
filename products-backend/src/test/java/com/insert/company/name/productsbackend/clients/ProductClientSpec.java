@@ -2,6 +2,7 @@ package com.insert.company.name.productsbackend.clients;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.insert.company.name.productsbackend.config.ProductClientConfig;
+import com.insert.company.name.productsbackend.fixtures.ProductFixture;
 import com.insert.company.name.productsbackend.models.entities.Product;
 import com.insert.company.name.productsbackend.utils.StubMappedSpec;
 import org.junit.Before;
@@ -25,7 +26,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Callum Cooper
  */
 @RunWith(MockitoJUnitRunner.class)
-public class ProductClientSpec extends StubMappedSpec {
+public class ProductClientSpec extends ProductFixture {
 
     private static final String PRODUCT_ID = "productId";
     private static final String PRODUCT_CLIENT_URL = "https://product-service.herokuapp.com/api/v1/products";
@@ -43,14 +44,13 @@ public class ProductClientSpec extends StubMappedSpec {
 
     @Before
     public void setup() throws Exception {
-        final Product product = loadStubMapping("/stubMappings/products-api-single-product-response-v1.0.0.json", Product.class);
         final ResponseEntity singleProductResponse = Mockito.mock(ResponseEntity.class);
 
         Mockito.when(productClientConfig.getUrl()).thenReturn(PRODUCT_CLIENT_URL);
         Mockito.when(productClientConfig.getUsername()).thenReturn(PRODUCT_CLIENT_USERNAME);
         Mockito.when(productClientConfig.getPassword()).thenReturn(PRODUCT_CLIENT_PASSWORD);
 
-        Mockito.when(singleProductResponse.getBody()).thenReturn(product);
+        Mockito.when(singleProductResponse.getBody()).thenReturn(singleProduct());
         Mockito.when(restTemplate.exchange(
                 Mockito.eq(PRODUCT_CLIENT_URL + "/" + PRODUCT_ID),
                 Mockito.eq(HttpMethod.GET),
@@ -58,11 +58,9 @@ public class ProductClientSpec extends StubMappedSpec {
                 Mockito.eq(Product.class)
         )).thenReturn(singleProductResponse);
 
-        final TypeReference<List<Product>> productTypeRef = new TypeReference<List<Product>>() {};
-        final List<Product> products = loadStubMappings("/stubMappings/products-api-all-products-response-v1.0.0.json", productTypeRef);
         final ResponseEntity allProductsResponse = Mockito.mock(ResponseEntity.class);
 
-        Mockito.when(allProductsResponse.getBody()).thenReturn(products);
+        Mockito.when(allProductsResponse.getBody()).thenReturn(products());
         Mockito.when(restTemplate.exchange(
                 Mockito.eq(PRODUCT_CLIENT_URL),
                 Mockito.eq(HttpMethod.GET),

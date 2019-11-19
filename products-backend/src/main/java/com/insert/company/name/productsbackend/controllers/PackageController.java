@@ -21,13 +21,13 @@ import java.util.List;
 public class PackageController {
 
     @Autowired
-    PackageService packageService;
+    private PackageService packageService;
 
     private static final String DEFAULT_BASE = "USD";
     private static final String DEFAULT_CURRENCY = "USD";
 
     @RequestMapping(value = "/package/create", method = RequestMethod.POST)
-    public ResponseEntity<CreatePackageResponse<Package>> createPackage(
+    public ResponseEntity<CreatePackageResponse> createPackage(
             @RequestBody CreatePackageRequest createPackageRequest,
             @RequestParam(value = "base", required = false, defaultValue = DEFAULT_BASE) String baseCountry,
             @RequestParam(value = "currency", required = false, defaultValue = DEFAULT_CURRENCY) String currency,
@@ -39,7 +39,7 @@ public class PackageController {
                 .buildAndExpand(createdPackage.getId())
                 .toUri();
 
-        final CreatePackageResponse<Package> createPackageResponse = new CreatePackageResponse<>(
+        final CreatePackageResponse createPackageResponse = new CreatePackageResponse(
                 201,
                 String.format("Package with id '%s' created", createdPackage.getId()),
                 createdPackage);
@@ -59,7 +59,7 @@ public class PackageController {
 
     @RequestMapping(value = "/package/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Package> updatePackage(@PathVariable String id,
-                                                @RequestBody UpdatePackageRequest updatePackageRequest) {
+                                                 @RequestBody UpdatePackageRequest updatePackageRequest) {
         final Package updatedPackage = packageService.updatePackage(id, updatePackageRequest);
 
         return ResponseEntity

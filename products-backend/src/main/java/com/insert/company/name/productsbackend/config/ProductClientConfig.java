@@ -15,10 +15,9 @@ public class ProductClientConfig {
     private String username;
 
     /**
-     * TODO: In a production system this password should never be exposed
-     *  in source control. A secret based solution to provision the
-     *  password directly onto the box with automation would
-     *  need to be adopted.
+     * TODO: In a production grade system this password should never be exposed
+     *  in source control. A secret based solution with automation as an
+     *  alternative would be more sophisticated.
      */
     @Value("${product.client.password:pass}")
     private String password;

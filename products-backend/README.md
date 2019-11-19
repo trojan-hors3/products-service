@@ -5,3 +5,9 @@
 ```bash
 mvn spring-boot:run
 ```
+
+##### Run unit tests
+
+```bash
+cd products-backend && mvn clean test
+```
