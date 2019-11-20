@@ -23,8 +23,8 @@ public class PackageController {
     @Autowired
     private PackageService packageService;
 
-    private static final String DEFAULT_BASE = "USD";
-    private static final String DEFAULT_CURRENCY = "USD";
+    private final String DEFAULT_BASE = "USD";
+    private final String DEFAULT_CURRENCY = "USD";
 
     @RequestMapping(value = "/package/create", method = RequestMethod.POST)
     public ResponseEntity<CreatePackageResponse> createPackage(

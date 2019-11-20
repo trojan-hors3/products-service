@@ -41,7 +41,7 @@ public class ExchangeRateClientSpec extends ExchangeRateFixture {
 
     @Test
     public void getExchangeRateSpec() {
-        System.out.println("* Get exchange rates should get current foreign exchange rates that are relative to the given base country");
+        System.out.println("* getExchangeRates() should get current foreign exchange rates that are relative to the given base country");
 
         final GetExchangeRatesResponse actualResponse = exchangeRateClient.getExchangeRates(UNITED_STATES_DOLLAR_ABBREVIATION);
         final LocalDate actualDate = LocalDate.parse(actualResponse.getQueryDate());

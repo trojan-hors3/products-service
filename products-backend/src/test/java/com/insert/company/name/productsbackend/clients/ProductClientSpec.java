@@ -71,7 +71,7 @@ public class ProductClientSpec extends ProductFixture {
 
     @Test
     public void getProductSpec() throws Exception {
-        System.out.println("* Get product should get a single product from the remote products API");
+        System.out.println("* getProduct() should get a single product from the remote products API");
 
         final Product actualProduct = productClient.getProduct(PRODUCT_ID);
         final Product expectedProduct = new Product("VqKb4tyj9V6i", "Shield", 1149);
@@ -83,7 +83,7 @@ public class ProductClientSpec extends ProductFixture {
 
     @Test
     public void getProductsSpec() throws Exception {
-        System.out.println("* Get products should get all products from the remote products API");
+        System.out.println("* getProducts() should get all products from the remote products API");
 
         final List<Product> actualProducts = productClient.getProducts();
 

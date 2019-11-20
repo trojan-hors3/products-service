@@ -26,11 +26,11 @@ public class PackageService {
     private ExchangeRateService exchangeRateService;
 
     @FunctionalInterface
-    interface ApplyNewPriceToProduct {
+    interface NewPricedProduct {
         Product apply(Product product, String baseCountry, String currency);
     }
 
-    private ApplyNewPriceToProduct applyNewPriceToProduct = (originalProduct, baseCountry, currency) -> {
+    private NewPricedProduct newPricedProduct = (originalProduct, baseCountry, currency) -> {
         final Double newPrice = exchangeRateService.exchange(originalProduct.getPrice(), baseCountry, currency);
 
         return new Product(originalProduct.getId(), originalProduct.getName(), newPrice.intValue());
@@ -41,7 +41,7 @@ public class PackageService {
                 .getProductIds()
                 .stream()
                 .map(productClient::getProduct)
-                .map(product -> applyNewPriceToProduct.apply(product, baseCountry, currency))
+                .map(product -> newPricedProduct.apply(product, baseCountry, currency))
                 .collect(Collectors.toList());
 
         Package newPackage = new Package(
@@ -56,11 +56,11 @@ public class PackageService {
     }
 
     @FunctionalInterface
-    interface ApplyUpdateToPackageStore {
+    interface UpdatedPackageInStore {
         Package apply(Package originalPackage, Package newPackage);
     }
 
-    private ApplyUpdateToPackageStore applyUpdateToPackageStore = (originalPackage, newPackage) -> {
+    private UpdatedPackageInStore updatedPackageInStore = (originalPackage, newPackage) -> {
         if (originalPackage.getId().equals(newPackage.getId()))
             return newPackage;
         else
@@ -81,7 +81,7 @@ public class PackageService {
             PackageRepository.dataStore = PackageRepository
                     .dataStore
                     .stream()
-                    .map(originalPackage -> applyUpdateToPackageStore.apply(originalPackage, newPackage))
+                    .map(originalPackage -> updatedPackageInStore.apply(originalPackage, newPackage))
                     .collect(Collectors.toList());
 
             return newPackage;

@@ -27,12 +27,4 @@ public class PackageRepository {
     public static Boolean packageExistsById(String id) {
         return filterById(id).size() > 0;
     }
-
-    public static Boolean updatePackage(Package _package) {
-        return dataStore
-                .stream()
-                .filter(p -> !p.getId().equals(_package.getId()))
-                .collect(Collectors.toList())
-                .add(_package);
-    }
 }

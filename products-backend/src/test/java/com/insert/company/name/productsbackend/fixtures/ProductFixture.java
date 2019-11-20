@@ -11,11 +11,11 @@ import java.util.List;
  */
 public class ProductFixture extends StubMappedSpec {
 
-    protected Product singleProduct() throws Exception {
+    public Product singleProduct() throws Exception {
         return loadStubMapping("/stubMappings/products-api-single-product-response-v1.0.0.json", Product.class);
     }
 
-    protected List<Product> products() throws Exception {
+    public List<Product> products() throws Exception {
         final TypeReference<List<Product>> productTypeRef = new TypeReference<List<Product>>() {};
 
         return loadStubMappings("/stubMappings/products-api-all-products-response-v1.0.0.json", productTypeRef);
