@@ -14,9 +14,19 @@ public class Product {
     @JsonProperty
     private String name;
 
-    @JsonProperty(value = "usdPrice")
     private int price;
 
+    @JsonProperty(value = "usdPrice")
+    public void  setPrice(int price) {
+        this.price = price;
+    }
+
+    @JsonProperty(value = "price")
+    public double getPrice() {
+        return this.price;
+    }
+
+    // Default constructor
     public Product() {}
 
     public Product(String id, String name, int price) {
