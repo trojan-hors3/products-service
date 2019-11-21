@@ -46,6 +46,11 @@ source ./scripts/cURL/delete_package.sh && deletePackage
 source ./scripts/cURL/list_packages.sh && listPackages
 ```
 
+##### Postman collection
+
+A Postman collection can be found at _./scripts/postman/products-service.postman_collection.json_
+and all requests can be imported into https://www.getpostman.com/. 
+
 ##### Run unit tests
 
 ```bash
