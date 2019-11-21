@@ -17,7 +17,12 @@ public class Product {
     private int price;
 
     @JsonProperty(value = "usdPrice")
-    public void  setPrice(int price) {
+    public void setUsdPrice(int usdPrice) {
+        this.price = usdPrice;
+    }
+
+    @JsonProperty(value = "price")
+    public void setPrice(int price) {
         this.price = price;
     }
 
