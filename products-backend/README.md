@@ -1,5 +1,9 @@
 # products-backend
 
+##### System Requirements
+
+![System Requirements](images/requirements.png)
+
 ##### Start the Tomcat server with Maven
 
 ```bash
