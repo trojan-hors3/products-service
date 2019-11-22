@@ -56,4 +56,3 @@ and all requests can be imported into https://www.getpostman.com/.
 ```bash
 cd products-backend && mvn clean test
 ```
-
