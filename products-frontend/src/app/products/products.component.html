@@ -1,5 +1,21 @@
+<br>
+
+<div class="input-group">
+  <input [(ngModel)]="searchTerm" type="text" class="form-control" placeholder="Search" aria-label="Search">
+</div>
+
+<br>
+
+<button type="button" class="btn btn-outline-primary" [class.active]="order === 'usdPrice'" (click)="setOrder('usdPrice')">
+  Sort by price <span [hidden]="reverse">▼</span>
+  <span [hidden]="!reverse">▲</span>
+</button  >
+
+<br>
+<br>
+
 <div class="row card-group">
-    <div class="col-4"  *ngFor="let product of products">
+    <div class="col-4"  *ngFor="let product of products | filter: searchTerm | orderBy: order:reverse:'case-insensitive'">
 
       <div class="card" style="width: 18rem;">
           <a href="/product/{{product.id}}">
@@ -10,6 +26,5 @@
             <p class="card-text">Price: ${{product.usdPrice}}</p>
           </div>
       </div>
-
     </div>
 </div>

@@ -11,6 +11,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductsComponent implements OnInit {
   products: Product[];
+  order: string = 'usdPrice';
+  reverse: boolean = false;
 
   constructor(private productService: ProductService) { }
 
@@ -23,5 +25,13 @@ export class ProductsComponent implements OnInit {
     .productService
     .getProducts()
     .subscribe(products => this.products = products);
+  }
+
+  setOrder(value: string) {
+    if (this.order === value) {
+      this.reverse = !this.reverse;
+    }
+
+    this.order = value;
   }
 }
