@@ -26,8 +26,9 @@ public class PackageController {
     private final String DEFAULT_BASE = "USD";
     private final String DEFAULT_CURRENCY = "USD";
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = "/package/create", method = RequestMethod.POST)
-    public ResponseEntity<CreatePackageResponse> createPackage(
+    public ResponseEntity<Package> createPackage(
             @RequestBody CreatePackageRequest createPackageRequest,
             @RequestParam(value = "base", required = false, defaultValue = DEFAULT_BASE) String baseCountry,
             @RequestParam(value = "currency", required = false, defaultValue = DEFAULT_CURRENCY) String currency,
@@ -39,24 +40,24 @@ public class PackageController {
                 .buildAndExpand(createdPackage.getId())
                 .toUri();
 
-        final CreatePackageResponse createPackageResponse = new CreatePackageResponse(
-                201,
-                String.format("Package with id '%s' created", createdPackage.getId()),
-                createdPackage);
-
         return ResponseEntity
                 .created(createdPackageLocation)
-                .body(createPackageResponse);
+                .body(createdPackage);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = "/package/{id}", method = RequestMethod.GET)
-    public ResponseEntity<List<Package>> getPackage(@PathVariable String id) {
+    public ResponseEntity<Package> getPackage(@PathVariable String id) {
+        List<Package> filteredPackages = PackageRepository.filterById(id);
+        Package headPackage = filteredPackages.subList(0, 1).get(0);
+
         return ResponseEntity
                 .ok()
                 .header("Content-type", "application/json")
-                .body(PackageRepository.filterById(id));
+                .body(headPackage);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = "/package/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Package> updatePackage(@PathVariable String id,
                                                  @RequestBody UpdatePackageRequest updatePackageRequest) {
@@ -68,6 +69,7 @@ public class PackageController {
                 .body(updatedPackage);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = "/package/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<List<Package>> deletePackage(@PathVariable String id) {
         final List<Package> deletedPackageStore = packageService.deletePackage(id);
@@ -78,6 +80,7 @@ public class PackageController {
                 .body(deletedPackageStore);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = "/packages", method = RequestMethod.GET)
     public ResponseEntity<List<Package>> getPackages() {
         return ResponseEntity

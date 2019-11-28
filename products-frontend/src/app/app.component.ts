@@ -1,3 +1,4 @@
+import { Basket } from './basket';
 import { Component } from '@angular/core';
 
 @Component({

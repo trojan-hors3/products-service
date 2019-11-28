@@ -1,0 +1,73 @@
+<br>
+
+<h1>Products</h1>
+
+<br>
+
+<div class="input-group">
+  <input [(ngModel)]="searchTermProduct" type="text" class="form-control" placeholder="Search" aria-label="Search">
+</div>
+
+<br>
+
+  <button type="button" class="btn btn-outline-primary" [class.active]="orderProducts === 'usdPrice'" (click)="setOrderProducts('usdPrice')">
+      Sort by Price<span [hidden]="reverseProducts"> ▼</span>
+      <span [hidden]="!reverseProducts"> ▲</span>
+  </button>
+
+<br>
+<br>
+
+<div class="row card-group">
+    <div class="col-4"  *ngFor="let product of products | filter: searchTermProduct | orderBy: orderProducts:reverseProducts:'case-insensitive'">
+
+      <div class="card" style="width: 18rem;">
+          <a href="/product/{{product.id}}">
+              <img class="card-img-top" src="assets/img/shield.svg" alt="Card image cap">
+          </a>
+          <div class="card-body">
+            <p class="card-text">Name: {{product.name}}</p>
+            <p class="card-text">Price: ${{product.usdPrice}}</p>
+            <button (click)="addProductToBasket(product)">Add to basket</button>
+          </div>
+      </div>
+    </div>
+</div>
+
+<br>
+
+<hr>
+
+<h1>Packages</h1>
+
+<br>
+
+<div class="input-group">
+  <input [(ngModel)]="searchTermPackage" type="text" class="form-control" placeholder="Search" aria-label="Search">
+</div>
+
+<br>
+
+<button type="button" class="btn btn-outline-primary" [class.active]="orderPackages === 'price'" (click)="setOrderPackages('price')">
+    Sort by Price<span [hidden]="reversePackages"> ▼</span>
+    <span [hidden]="!reversePackages"> ▲</span>
+</button>
+
+<br>
+<br>
+
+<div class="row card-group">
+    <div class="col-4"  *ngFor="let package of packages | filter: searchTermPackage | orderBy: orderPackages:reversePackages:'case-insensitive'">
+        <div class="card" style="width: 18rem;">
+            <a href="/package/{{package.id}}">
+                <img class="card-img-top" src="assets/img/shield.svg" alt="Card image cap">
+            </a>
+            <div class="card-body">
+              <p class="card-text">Name: {{package.name}}</p>
+              <p class="card-text">Description: {{package.description}}</p>
+              <p class="card-text">Price: ${{package.price}}</p>
+              <button (click)="addPackageToBasket(package)">Add to basket</button>
+            </div>
+        </div>
+    </div>
+</div>

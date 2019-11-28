@@ -10,7 +10,7 @@ import { Product } from './../product';
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent implements OnInit {
-  product: Product;
+  product: Product = new Product();
 
   constructor(
       private route: ActivatedRoute,

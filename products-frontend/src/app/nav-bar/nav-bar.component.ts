@@ -1,4 +1,6 @@
 import { Link } from './../link';
+import { BasketService } from './../basket.service';
+import { Basket } from './../basket';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,10 +9,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./nav-bar.component.css']
 })
 export class NavBarComponent implements OnInit {
-  constructor() { }
+  constructor(private basketService: BasketService) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
-  productsShopLink: Link = { url: '/products', message: 'Products Shop' };
+  productsShopLink: Link = { url: '/shop', message: 'Products Shop' };
 }

@@ -1,0 +1,25 @@
+<div class="d-flex justify-content-center">
+    <div class="card" style="width: 18rem;">
+          <img class="card-img-top" src="assets/img/shield.svg" alt="Card image cap">
+        <div class="card-body">
+          <p class="card-text">Name: {{package.name}}</p>
+          <p class="card-text">Description: {{package.description}}</p>
+
+          <p class="card-text">Products: </p>
+          <div *ngFor="let product of package.products">
+            <div class="row">
+                <div class="col-5">
+                    <p class="card-text">{{product.name}}</p>
+                </div>
+                <div class="col-5">
+                    <p class="card-text">${{product.price}}</p>
+                </div>
+            </div>
+          </div>
+
+          <hr>
+          <p class="font-weight-bold">Total Price: ${{package.price}}</p>
+          <button>Add to basket</button>
+        </div>
+    </div>
+  </div>

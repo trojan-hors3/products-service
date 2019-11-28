@@ -1,5 +1,16 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="{{productsShopLink.url}}">{{productsShopLink.message}}</a>
+
+  <a class="btn btn-success btn-sm ml-3" href="#">
+      <i class="fa fa-shopping-cart"></i> Basket
+      <span class="badge badge-light">{{basketService.getBasketSize()}}</span>
+      <span></span>
+      <span class="badge badge-danger">${{basketService.getBasketPrice()}}</span>
+  </a>
+
+  <button class="btn btn-danger btn-sm ml-3" (click)="basketService.clearBasket()">
+      <i class="fa fa-shopping-cart"></i> Clear
+  </button>
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
