@@ -1,3 +1,4 @@
+import { BasketService } from './../basket.service';
 import { PackageService } from './../package.service';
 import { Package } from './../package';
 import { ActivatedRoute } from '@angular/router';
@@ -12,7 +13,8 @@ export class PackageComponent implements OnInit {
   package: Package = new Package();
 
   constructor(private route: ActivatedRoute,
-              private packageService: PackageService) {}
+              private packageService: PackageService,
+              private basketService: BasketService) {}
 
   ngOnInit() {
     this.getPackage();
@@ -25,6 +27,14 @@ export class PackageComponent implements OnInit {
     .packageService
     .getPackage(packageId)
     .subscribe(p => this.package = p);
+  }
+
+  addPackageToBasket(p: Package) {
+    this
+    .basketService
+    .basket
+    .packages
+    .push(p);
   }
 
 }
